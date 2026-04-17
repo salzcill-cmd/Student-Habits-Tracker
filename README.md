@@ -88,7 +88,7 @@ news/
 
 ### Clone Repository
 ```bash
-git clone https://github.com/yourusername/student-habit-tracker.git
+git clone https://github.com/salzcill-cmd/Student-Habits-Tracker.git
 cd student-habit-tracker
 ```
 
@@ -194,7 +194,7 @@ SOFTWARE.
 - **Author:** Student Habit Tracker Team
 - **Email:** hello@studenthabittracker.id
 - **Website:** https://studenthabittracker.id
-- **GitHub:** https://github.com/student-habit-tracker
+- **GitHub:** https://github.com/salzcill-cmd/
 
 ---
 
