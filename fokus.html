@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mode Fokus - Student Habit Tracker">
+    <title>Fokus - Student Habit Tracker</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .focus-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .focus-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .focus-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .focus-timer-wrapper {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .focus-timer-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .focus-timer-display {
+            font-size: 5rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .focus-mode-label {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .focus-session-counter {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+        
+        .focus-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .focus-btn-control {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .focus-btn-control:hover {
+            transform: scale(1.1);
+        }
+        
+        .focus-btn-control.primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .focus-btn-control.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .focus-btn-control.secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .focus-mode-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .mode-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .mode-btn:hover,
+        .mode-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: white;
+        }
+        
+        .focus-stats {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .focus-stat-item {
+            text-align: center;
+        }
+        
+        .focus-stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .focus-stat-label {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+        
+        .focus-tips {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .keyboard-hint {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+            text-align: right;
+        }
+        
+        .keyboard-hint kbd {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin: 0 0.25rem;
+        }
+        
+        .exit-focus {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+        }
+        
+        .exit-focus a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .exit-focus a:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .focus-timer-wrapper {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .focus-timer-display {
+                font-size: 4rem;
+            }
+            
+            .focus-stats {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .keyboard-hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="focus-page">
+        <!-- Exit Button -->
+        <div class="exit-focus">
+            <a href="index.html">
+                <i class="bi bi-arrow-left"></i> Kembali
+            </a>
+        </div>
+        
+        <!-- Keyboard Hint -->
+        <div class="keyboard-hint">
+            <div><kbd>Space</kbd> Play/Pause</div>
+            <div><kbd>R</kbd> Reset</div>
+            <div><kbd>Esc</kbd> Exit Fullscreen</div>
+        </div>
+        
+        <div class="focus-content">
+            <!-- Mode Buttons -->
+            <div class="focus-mode-buttons">
+                <button class="mode-btn active" id="workSetting">
+                    <i class="bi bi-book me-2"></i>Fokus (25m)
+                </button>
+                <button class="mode-btn" id="breakSetting">
+                    <i class="bi bi-cup-hot me-2"></i>Istirahat (5m)
+                </button>
+            </div>
+            
+            <!-- Mode Label -->
+            <div class="focus-mode-label" id="focusLabel">
+                Mode Fokus - Konsentrasi Penuh!
+            </div>
+            
+            <!-- Timer Display -->
+            <div class="focus-timer-wrapper">
+                <div class="focus-timer-circle">
+                    <div class="focus-timer-display" id="focusTimer">
+                        25:00
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Session Counter -->
+            <div class="focus-session-counter" id="sessionCounter">
+                Sesi: 0
+            </div>
+            
+            <!-- Controls -->
+            <div class="focus-controls">
+                <button class="focus-btn-control secondary" id="focusSkipBtn" title="Lewati sesi">
+                    <i class="bi bi-skip-forward-fill"></i>
+                </button>
+                <button class="focus-btn-control primary" id="focusPlayBtn">
+                    <i class="bi bi-play-fill"></i>
+                </button>
+                <button class="focus-btn-control secondary" id="focusResetBtn" title="Reset timer">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                </button>
+                <button class="focus-btn-control secondary" id="fullscreenBtn" title="Fullscreen">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                </button>
+            </div>
+            
+            <!-- Stats -->
+            <div class="focus-stats">
+                <div class="focus-stat-item">
+                    <div class="focus-stat-number" id="todayFocusMinutes">0</div>
+                    <div class="focus-stat-label">Menit Hari Ini</div>
+                </div>
+                <div class="focus-stat-item">
+                    <div class="focus-stat-number" id="totalFocusSessions">0</div>
+                    <div class="focus-stat-label">Total Sesi</div>
+                </div>
+                <div class="focus-stat-item">
+                    <div class="focus-stat-number" id="totalFocusMinutes">0</div>
+                    <div class="focus-stat-label">Total Menit</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tips -->
+        <div class="focus-tips">
+            <i class="bi bi-lightbulb"></i>
+            <span>Fokus pada satu tugas pada satu waktu</span>
+        </div>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/dayjs@1/dayjs.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/focus.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            FocusMode.init();
+            
+            // Request notification permission
+            if ('Notification' in window && Notification.permission === 'default') {
+                Notification.requestPermission();
+            }
+        });
+    </script>
+</body>
+</html>
