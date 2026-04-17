@@ -191,9 +191,9 @@ SOFTWARE.
 
 ## 👤 Kontak
 
-- **Author:** Student Habit Tracker Team
+- **Author:** Izzdev
 - **Email:** hello@studenthabittracker.id
-- **Website:** https://studenthabittracker.id
+- **Website:** https://salzcill-cmd.github.io/Student-Habits-Tracker/
 - **GitHub:** https://github.com/salzcill-cmd/
 
 ---
